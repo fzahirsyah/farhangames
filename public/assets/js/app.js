@@ -2,29 +2,48 @@ const apps = [
   {
     id: "app-1",
     name: "Sample App 1",
-    url: "https://script.google.com/macros/s/REPLACE_WITH_APP_1/exec",
+    url: "https://script.google.com/macros/s/YOUR-APPSCRIPT-DEPLOYMENT-ID-ONE/exec",
   },
   {
     id: "app-2",
     name: "Sample App 2",
-    url: "https://script.google.com/macros/s/REPLACE_WITH_APP_2/exec",
+    url: "https://script.google.com/macros/s/YOUR-APPSCRIPT-DEPLOYMENT-ID-TWO/exec",
   },
 ];
 
 const appList = document.getElementById("app-list");
 const appFrame = document.getElementById("app-frame");
+const frameStatus = document.getElementById("frame-status");
+let loadTimeout;
 
 function isSafeAppUrl(url) {
-  return /^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(url);
+  return /^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9-]{20,}\/exec$/.test(url);
+}
+
+function setStatus(message, tone = "info") {
+  if (!frameStatus) {
+    return;
+  }
+
+  frameStatus.textContent = message;
+  frameStatus.className =
+    tone === "error" ? "mt-2 text-sm text-rose-300" : "mt-2 text-sm text-slate-400";
 }
 
 function setActiveApp(app) {
   if (!isSafeAppUrl(app.url)) {
     console.warn(`Invalid or unsafe Apps Script URL for ${app.name}`);
+    setStatus(`Cannot load ${app.name}: invalid URL configuration.`, "error");
     return;
   }
 
+  clearTimeout(loadTimeout);
+  setStatus(`Loading ${app.name}...`);
   appFrame.src = app.url;
+
+  loadTimeout = setTimeout(() => {
+    setStatus(`Still waiting for ${app.name}. Check deployment access and URL.`, "error");
+  }, 15000);
 
   document.querySelectorAll("[data-app-id]").forEach((button) => {
     button.classList.toggle("bg-indigo-500", button.dataset.appId === app.id);
@@ -33,6 +52,11 @@ function setActiveApp(app) {
     button.classList.toggle("text-slate-100", button.dataset.appId !== app.id);
   });
 }
+
+appFrame.addEventListener("load", () => {
+  clearTimeout(loadTimeout);
+  setStatus("App loaded.");
+});
 
 apps.forEach((app, index) => {
   const button = document.createElement("button");

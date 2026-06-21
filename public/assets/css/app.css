@@ -1,0 +1,101 @@
+:root {
+  --card-bg: rgba(15, 23, 42, 0.6);
+}
+
+.app-shell {
+  min-height: 100dvh;
+}
+
+.page-view {
+  animation: fadeIn 140ms ease-out;
+}
+
+.panel-card {
+  border-radius: 1rem;
+  border: 1px solid rgb(30 41 59 / 0.9);
+  background: var(--card-bg);
+  box-shadow: 0 10px 40px -20px rgba(0, 0, 0, 0.9);
+}
+
+/* Portrait frame wrapper */
+.frame-portrait-wrap {
+  height: calc(100% - 1.5rem);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/*
+  Keep original 9:16 width behavior, but make it ~1 inch taller.
+  On web CSS, 1in = 96px.
+*/
+.frame-portrait {
+  aspect-ratio: 9 / 16;
+  width: min(100%, calc((100dvh - 220px) * 9 / 16));
+  max-height: calc(100dvh - 220px + 288px); /* +3 inches total (96px * 3) */
+  border-radius: 1rem;
+  border: 1px solid rgb(51 65 85);
+  background: rgb(15 23 42);
+  padding: 0.4rem;
+  box-shadow: 0 14px 40px -20px rgba(0, 0, 0, 0.95);
+}
+
+.frame-portrait-iframe {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgb(30 41 59);
+  border-radius: 0.75rem;
+  background: white;
+}
+
+.nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  padding: 0.5rem 0.4rem;
+  transition: all 0.16s ease;
+}
+
+.nav-btn-active {
+  background: rgb(79 70 229 / 0.92);
+  color: white;
+  box-shadow: 0 10px 22px -16px rgba(67, 56, 202, 0.9);
+}
+
+.nav-btn-idle {
+  background: rgb(30 41 59);
+  color: rgb(241 245 249);
+}
+
+.menu-item,
+.menu-item-danger {
+  width: 100%;
+  border-radius: 0.7rem;
+  padding: 0.65rem 0.8rem;
+  text-align: left;
+  font-size: 0.9rem;
+  transition: background 0.14s ease;
+}
+
+.menu-item {
+  background: rgb(30 41 59);
+  color: rgb(241 245 249);
+}
+.menu-item:hover {
+  background: rgb(51 65 85);
+}
+
+.menu-item-danger {
+  background: rgb(244 63 94 / 0.9);
+  color: white;
+}
+.menu-item-danger:hover {
+  background: rgb(225 29 72);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0.65; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}

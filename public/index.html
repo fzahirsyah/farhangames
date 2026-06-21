@@ -2,36 +2,80 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Farhan Games</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./assets/css/app.css" />
   </head>
   <body class="min-h-screen bg-slate-950 text-slate-100">
-    <div class="mx-auto flex min-h-screen max-w-7xl flex-col p-4 md:p-6">
-      <header class="mb-4 rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-        <h1 class="text-2xl font-bold">Farhan Games</h1>
-        <p class="text-sm text-slate-400">Cloudflare Pages frontend for App Script web apps</p>
+    <div class="app-shell mx-auto flex min-h-screen w-full max-w-md flex-col bg-slate-950">
+      <header
+        class="sticky top-0 z-20 border-b border-slate-800/80 bg-slate-900/80 px-4 pb-3 pt-[max(0.75rem,env(safe-area-inset-top))] backdrop-blur"
+      >
+        <h1 class="text-lg font-bold tracking-tight">Farhan Games</h1>
+        <p class="text-xs text-slate-400">Mobile Launcher</p>
       </header>
 
-      <div class="grid flex-1 gap-4 md:grid-cols-[320px_1fr]">
-        <aside class="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-          <h2 class="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-300">Apps</h2>
-          <nav id="app-list" class="space-y-2"></nav>
-        </aside>
+      <main class="relative flex-1 overflow-hidden px-3 pb-24 pt-3">
+        <section id="pages-container" class="relative h-full w-full">
+          <!-- Page 1: Selected Game -->
+          <section id="page-select-game" class="page-view h-full">
+            <div class="frame-portrait-wrap">
+              <div class="frame-portrait">
+                <iframe
+                  id="app-frame"
+                  title="App Script Application"
+                  class="frame-portrait-iframe"
+                  loading="lazy"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                ></iframe>
+              </div>
+            </div>
+            <p id="frame-status" class="mt-2 px-1 text-xs text-slate-400">Go to List and select a game.</p>
+          </section>
 
-        <main class="rounded-xl border border-slate-800 bg-slate-900/60 p-2">
-          <iframe
-            id="app-frame"
-            title="App Script Application"
-            class="h-[75vh] w-full rounded-lg border border-slate-800 bg-white"
-            loading="lazy"
-            referrerpolicy="strict-origin-when-cross-origin"
-          ></iframe>
-          <p id="frame-status" class="mt-2 text-sm text-slate-400">Select an app to load.</p>
-        </main>
-      </div>
+          <!-- Page 2: Game List -->
+          <section id="page-game-list" class="page-view hidden h-full">
+            <div class="panel-card flex h-full flex-col p-3">
+              <div class="mb-2 flex items-center justify-between">
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-300">Game List</h2>
+                <span class="rounded-md bg-slate-800 px-2 py-0.5 text-[10px] text-slate-400">Apps Script</span>
+              </div>
+              <nav id="app-list" class="space-y-2 overflow-auto pr-1"></nav>
+            </div>
+          </section>
+
+          <!-- Page 3: Menu -->
+          <section id="page-menu" class="page-view hidden h-full">
+            <div class="panel-card h-full p-3">
+              <h2 class="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-300">Menu</h2>
+              <p class="mb-3 text-xs text-slate-400">Settings and utility actions.</p>
+              <div class="space-y-2">
+                <button class="menu-item">Profile</button>
+                <button class="menu-item">Theme</button>
+                <button class="menu-item">Help</button>
+                <button class="menu-item-danger">Logout</button>
+              </div>
+            </div>
+          </section>
+        </section>
+      </main>
+
+      <nav
+        class="fixed bottom-0 left-1/2 z-30 w-full max-w-md -translate-x-1/2 border-t border-slate-800/80 bg-slate-900/90 px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 backdrop-blur"
+        aria-label="Bottom navigation"
+      >
+        <div class="grid grid-cols-3 gap-2">
+          <button id="nav-select-game" type="button" class="nav-btn nav-btn-active"><span class="text-[11px] font-medium">Select</span></button>
+          <button id="nav-game-list" type="button" class="nav-btn nav-btn-idle"><span class="text-[11px] font-medium">List</span></button>
+          <button id="nav-menu" type="button" class="nav-btn nav-btn-idle"><span class="text-[11px] font-medium">Menu</span></button>
+        </div>
+      </nav>
     </div>
 
+    <script src="./assets/js/config.js"></script>
+    <script src="./assets/js/ui.js"></script>
     <script src="./assets/js/app.js"></script>
+    <script src="./assets/js/nav.js"></script>
   </body>
 </html>

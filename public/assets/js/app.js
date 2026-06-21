@@ -18,7 +18,7 @@ const LOAD_TIMEOUT_MS = 15000;
 let loadTimeout;
 
 function isSafeAppUrl(url) {
-  return /^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]{30,80}\/exec$/.test(url);
+  return /^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]{50,70}\/exec$/.test(url);
 }
 
 function setStatus(message, tone = "info") {
@@ -64,7 +64,7 @@ apps.forEach((app, index) => {
   button.type = "button";
   button.dataset.appId = app.id;
   button.className =
-    "w-full rounded-lg px-3 py-2 text-left text-sm font-medium transition hover:bg-indigo-400 hover:text-white";
+    "w-full rounded-lg bg-slate-800 px-3 py-2 text-left text-sm font-medium text-slate-100 transition hover:bg-indigo-400 hover:text-white";
   button.textContent = app.name;
   button.addEventListener("click", () => setActiveApp(app));
   appList.appendChild(button);

@@ -2,12 +2,12 @@ const apps = [
   {
     id: "app-1",
     name: "Sample App 1",
-    url: "https://script.google.com/macros/s/YOUR-APPSCRIPT-DEPLOYMENT-ID-ONE/exec",
+    url: "https://script.google.com/macros/s/YOURAPPSCRIPTDEPLOYMENTIDEXAMPLE1234567890ABCD/exec",
   },
   {
     id: "app-2",
     name: "Sample App 2",
-    url: "https://script.google.com/macros/s/YOUR-APPSCRIPT-DEPLOYMENT-ID-TWO/exec",
+    url: "https://script.google.com/macros/s/YOURAPPSCRIPTDEPLOYMENTIDEXAMPLE1234567890WXYZ/exec",
   },
 ];
 
@@ -18,7 +18,7 @@ const LOAD_TIMEOUT_MS = 15000;
 let loadTimeout;
 
 function isSafeAppUrl(url) {
-  return /^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]{20,}\/exec$/.test(url);
+  return /^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]{30,80}\/exec$/.test(url);
 }
 
 function setStatus(message, tone = "info") {
@@ -33,7 +33,7 @@ function setStatus(message, tone = "info") {
 
 function setActiveApp(app) {
   if (!isSafeAppUrl(app.url)) {
-    console.warn(`Invalid or unsafe Apps Script URL for ${app.name}`);
+    console.warn(`Invalid or unsafe Apps Script URL for ${app.id}`);
     setStatus(`Cannot load ${app.name}: invalid URL configuration.`, "error");
     return;
   }

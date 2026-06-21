@@ -12,5 +12,5 @@ Front-end for `farhangames.site` on Cloudflare Pages.
 ## Setup
 
 1. Deploy the `public/` directory to Cloudflare Pages.
-2. Edit `public/assets/js/app.js` and replace `YOUR-APPSCRIPT-DEPLOYMENT-ID-*` with your Google Apps Script deployment IDs.
+2. Edit `public/assets/js/app.js` and replace sample deployment ID placeholders with your Google Apps Script deployment IDs.
 3. The iframe uses `strict-origin-when-cross-origin` to balance compatibility and referrer privacy.

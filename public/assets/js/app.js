@@ -14,10 +14,11 @@ const apps = [
 const appList = document.getElementById("app-list");
 const appFrame = document.getElementById("app-frame");
 const frameStatus = document.getElementById("frame-status");
+const LOAD_TIMEOUT_MS = 15000;
 let loadTimeout;
 
 function isSafeAppUrl(url) {
-  return /^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9-]{20,}\/exec$/.test(url);
+  return /^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]{20,}\/exec$/.test(url);
 }
 
 function setStatus(message, tone = "info") {
@@ -43,7 +44,7 @@ function setActiveApp(app) {
 
   loadTimeout = setTimeout(() => {
     setStatus(`Still waiting for ${app.name}. Check deployment access and URL.`, "error");
-  }, 15000);
+  }, LOAD_TIMEOUT_MS);
 
   document.querySelectorAll("[data-app-id]").forEach((button) => {
     button.classList.toggle("bg-indigo-500", button.dataset.appId === app.id);

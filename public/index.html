@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Farhan Games</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="min-h-screen bg-slate-950 text-slate-100">
+    <div class="mx-auto flex min-h-screen max-w-7xl flex-col p-4 md:p-6">
+      <header class="mb-4 rounded-xl border border-slate-800 bg-slate-900/60 p-4">
+        <h1 class="text-2xl font-bold">Farhan Games</h1>
+        <p class="text-sm text-slate-400">Cloudflare Pages frontend for App Script web apps</p>
+      </header>
+
+      <div class="grid flex-1 gap-4 md:grid-cols-[320px_1fr]">
+        <aside class="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
+          <h2 class="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-300">Apps</h2>
+          <nav id="app-list" class="space-y-2"></nav>
+        </aside>
+
+        <main class="rounded-xl border border-slate-800 bg-slate-900/60 p-2">
+          <iframe
+            id="app-frame"
+            title="App Script Application"
+            class="h-[75vh] w-full rounded-lg border border-slate-800 bg-white"
+            loading="lazy"
+            referrerpolicy="no-referrer"
+          ></iframe>
+        </main>
+      </div>
+    </div>
+
+    <script src="./assets/js/app.js"></script>
+  </body>
+</html>

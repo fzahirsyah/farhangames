@@ -15,11 +15,12 @@ const appList = document.getElementById("app-list");
 const appFrame = document.getElementById("app-frame");
 
 function isSafeAppUrl(url) {
-  return /^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(url);
+  return /^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(url);
 }
 
 function setActiveApp(app) {
   if (!isSafeAppUrl(app.url)) {
+    console.warn(`Invalid or unsafe Apps Script URL for ${app.name}`);
     return;
   }
 
